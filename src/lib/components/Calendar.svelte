@@ -15,12 +15,12 @@
 
   // Fill the blank spaces for days before the first day of the month
   for (let i = 0; i < firstDay; i++) {
-      calendarDays.push('');
+    calendarDays.push('');
   }
 
   // Fill the days of the month
   for (let i = 1; i <= daysInMonth; i++) {
-      calendarDays.push(i);
+    calendarDays.push(i);
   }
   //----------------------------------------------
   
@@ -32,7 +32,9 @@
   
   // Handlers 
   const handleClick = (e: any) => {
-    alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
+    // alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
+    // displayModal.set(true);
+    document.querySelector('.c-modal').classList.add('is-active');
   }
   
   onMount(() => {
@@ -79,6 +81,7 @@
     &__date-block {
       padding: 10px 10px 60px 10px;
       border: 1px solid #ccc;
+      cursor: pointer;
     }
   }  
   
@@ -89,7 +92,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    padding: 5px;
+    padding: 2px;
     background: green;
     color: white;
     border-radius: 50%;

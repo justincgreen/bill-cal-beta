@@ -1,7 +1,15 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 import Calendar from "$lib/components/Calendar.svelte";
-import Panel from "$lib/components/Panel.svelte";
+import Modal from "$lib/components/Modal.svelte";
+
+// Context
+  // import {setContext, getContext } from 'svelte';
+  // import { writable } from 'svelte/store';  
+  // const displayModal = writable(false);
+  // setContext('modalContext', displayModal);
+
+// console.log(displayModal)
 
 // Month, Day, Year
 //-----------------------------
@@ -29,7 +37,6 @@ const currentMonth = months[currentMonthIndex];
 // 
 // let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
 
-
 </script>
 
 <div class="c-chip__group">
@@ -41,6 +48,8 @@ const currentMonth = months[currentMonthIndex];
 <!-- <h2>Current Day: { currentDayOfMonth }</h2> -->
 
 <Calendar />
+  
+<Modal />
 
 <style lang="scss">
   .c-chip {
