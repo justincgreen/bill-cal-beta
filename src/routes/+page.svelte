@@ -1,8 +1,9 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 import CalBlock from "$lib/components/CalBlock.svelte";
+import Calendar from "$lib/components/Calendar.svelte";
 
-// Get Current Day & Month
+// Month, Day, Year
 //-----------------------------
 const months = [
     "January", "February", "March", "April", "May", "June",
@@ -13,15 +14,20 @@ const currentDayOfMonth = currentDate.getDate();
 const currentYear = currentDate.getFullYear();
 const currentMonthIndex = currentDate.getMonth();
 const currentMonth = months[currentMonthIndex];
+
+// const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// const today = new Date();
+// const dayIndex = today.getDay();
+// const dayName = daysOfWeek[dayIndex];  
 //---------------------------------------    
 
-// # of days in a month
+// # of days in a month (the total count)
 //--------------------------
 function getDaysInMonth(month: number, year: number) {
   return new Date(year, month, 0).getDate();
 }
 
-let daysInMonth = getDaysInMonth(currentMonthIndex, 2024); // TODO: need to make this dynamic
+let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
 let totalCalendarDays: Array<number>= []; // NOTE: May not need this
 
 // Functions (Handlers)
@@ -53,15 +59,7 @@ onMount(() => {
 <h2>{ currentMonth } { currentYear }</h2>
 <h2>Current Day: { currentDayOfMonth }</h2>
 
-<div class="c-grid">
-  {#each Array(daysInMonth).keys() as index}
-    <!-- <div>Item {index + 1}</div> -->
-    <CalBlock 
-      on:click={handleBlockClick}
-      dateNumber={index + 1}      
-    />
-  {/each}
-</div>
+<Calendar />
 
 <style lang="scss">
   .c-chip {

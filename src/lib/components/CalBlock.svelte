@@ -1,9 +1,16 @@
 <script lang="ts">
   export let dateNumber: number;  
+  // export let dayTitle: string;  
+  
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const today = new Date();
+  const dayIndex = today.getDay();
+  const dayName = daysOfWeek[dayIndex];  
 </script>
 
 <div class="c-cal-block" on:click role="button"tabindex="0">
-  <span class={`c-cal-block__date test-${dateNumber}`}>{ dateNumber }</span>
+  <span class={`c-cal-block__date test-${ dateNumber }`}>{ dateNumber }</span>
+  <h6></h6>
 </div>
 
 <style lang="scss">
