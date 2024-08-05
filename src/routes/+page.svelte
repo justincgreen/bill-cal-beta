@@ -1,6 +1,5 @@
 <script lang="ts">
 import { onMount } from 'svelte';
-import CalBlock from "$lib/components/CalBlock.svelte";
 import Calendar from "$lib/components/Calendar.svelte";
 
 // Month, Day, Year
@@ -28,27 +27,8 @@ function getDaysInMonth(month: number, year: number) {
 }
 
 let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
-let totalCalendarDays: Array<number>= []; // NOTE: May not need this
 
-// Functions (Handlers)
-const handleBlockClick = (e: any) => {
-  alert();
-  // document.querySelector('.c-panel').classList.add('is-active');
-  // panelData = e.currentTarget.textContent;
-}   
 
-onMount(() => {
-  const calBlocks = document.querySelectorAll('.c-cal-block');
-  calBlocks.forEach((block) => {
-    let text = block.firstChild.innerHTML;
-    let converted = parseInt(text);
-    totalCalendarDays.push(converted); // NOTE: May not need this
-    
-    if(converted === currentDayOfMonth) {
-      block.classList.add('current-day');
-    }
-  });        
-});
 </script>
 
 <div class="c-chip__group">
