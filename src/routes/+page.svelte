@@ -1,17 +1,8 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 import Calendar from "$lib/components/Calendar.svelte";
-import Modal from "$lib/components/Modal.svelte";
 
-// Context
-  // import {setContext, getContext } from 'svelte';
-  // import { writable } from 'svelte/store';  
-  // const displayModal = writable(false);
-  // setContext('modalContext', displayModal);
-
-// console.log(displayModal)
-
-// Month, Day, Year
+// Month, Day, Year logic
 //-----------------------------
 const months = [
     "January", "February", "March", "April", "May", "June",
@@ -49,8 +40,6 @@ const currentMonth = months[currentMonthIndex];
 
 <Calendar />
   
-<Modal />
-
 <style lang="scss">
   .c-chip {
     width: 20px;
@@ -77,12 +66,5 @@ const currentMonth = months[currentMonthIndex];
   
   h2 {
     text-align: center;
-  }
-  
-  .c-grid {
-    max-width: 900px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 </style>

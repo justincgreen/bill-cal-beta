@@ -1,18 +1,25 @@
 <script lang="ts">
-  
+ export let modalData: any; 
+ 
+ const closeModal = () => {
+  modalData.show = false;
+ }
 </script>
 
-<div class="c-modal">
+{#if modalData.show}
+<div class="c-modal is-active">
   <div class="c-modal__panel">
     <h2>Modal Panel Header</h2>
     <button>Mark Pay Day</button>
     <button>Add Bill</button>
-    <button>Close</button>
+    <button on:click={closeModal}>Close</button>
   </div>
 </div>
+{/if}
 
 <style lang="scss">
-  :global(.is-active) {
+  // Not being used currently
+  :global(.is-active) { 
     display: grid !important;
   }
   .c-modal {

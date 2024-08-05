@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Modal from "$lib/components/Modal.svelte";   
   
   // Build Calendar
   let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
   let date = new Date();
   let year = date.getFullYear();
   let month = date.getMonth();
@@ -30,11 +30,17 @@
   let totalCalendarDays: Array<number> = []; 
   //-----------------------------------------------
   
+  // Modal logic
+  let displayModal = {
+    show: false
+  }; 
+  //-----------------------------------------------
+  
   // Handlers 
-  const handleClick = (e: any) => {
+  const handleClick = () => {
     // alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
-    // displayModal.set(true);
-    document.querySelector('.c-modal').classList.add('is-active');
+    // document.querySelector('.c-modal').classList.add('is-active');
+    displayModal.show = !displayModal.show
   }
   
   onMount(() => {
@@ -63,6 +69,8 @@
     </div>
   {/each}
 </div>
+
+<Modal modalData={displayModal} />
 
 <style lang="scss">
   .c-calendar {
