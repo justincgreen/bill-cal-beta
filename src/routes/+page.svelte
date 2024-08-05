@@ -1,6 +1,7 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 import Calendar from "$lib/components/Calendar.svelte";
+import Panel from "$lib/components/Panel.svelte";
 
 // Month, Day, Year
 //-----------------------------
@@ -9,7 +10,7 @@ const months = [
     "July", "August", "September", "October", "November", "December"
 ];
 const currentDate = new Date();
-const currentDayOfMonth = currentDate.getDate();
+// const currentDayOfMonth = currentDate.getDate();
 const currentYear = currentDate.getFullYear();
 const currentMonthIndex = currentDate.getMonth();
 const currentMonth = months[currentMonthIndex];
@@ -22,11 +23,11 @@ const currentMonth = months[currentMonthIndex];
 
 // # of days in a month (the total count)
 //--------------------------
-function getDaysInMonth(month: number, year: number) {
-  return new Date(year, month, 0).getDate();
-}
-
-let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
+// function getDaysInMonth(month: number, year: number) {
+//   return new Date(year, month, 0).getDate();
+// }
+// 
+// let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
 
 
 </script>
@@ -37,7 +38,7 @@ let daysInMonth = getDaysInMonth(currentMonthIndex, currentYear);
 </div>
 
 <h2>{ currentMonth } { currentYear }</h2>
-<h2>Current Day: { currentDayOfMonth }</h2>
+<!-- <h2>Current Day: { currentDayOfMonth }</h2> -->
 
 <Calendar />
 

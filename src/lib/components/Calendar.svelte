@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  
+  // Build Calendar
   let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   let date = new Date();
@@ -20,11 +22,12 @@
   for (let i = 1; i <= daysInMonth; i++) {
       calendarDays.push(i);
   }
-  
   //----------------------------------------------
+  
+  // Logic for dynamic .current-day class on calendar
   const currentDate = new Date();
   const currentDayOfMonth = currentDate.getDate();
-  let totalCalendarDays: Array<number> = [];
+  let totalCalendarDays: Array<number> = []; 
   //-----------------------------------------------
   
   // Handlers 
