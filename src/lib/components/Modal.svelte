@@ -1,5 +1,6 @@
 <script lang="ts">
  export let modalData: any; 
+ export let panelInfo: any; 
  
  const closeModal = () => {
   modalData.show = false;
@@ -13,6 +14,8 @@
     <button>Mark Pay Day</button>
     <button>Add Bill</button>
     <button on:click={closeModal}>Close</button>
+    
+    <span class="c-modal__panel-date">{ panelInfo?.date }</span>
   </div>
 </div>
 {/if}

@@ -34,13 +34,24 @@
   let displayModal = {
     show: false
   }; 
+  
+  // let panelDate: { date: string; } = {
+  //   date: 'placeholder'
+  // }
+  
+  interface panelObject {
+    date?: string;
+  }
+  
+  let panelDate: panelObject = { date: 'placeholder' };
   //-----------------------------------------------
   
   // Handlers 
-  const handleClick = () => {
+  const handleClick = (e: any) => {
     // alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
     // document.querySelector('.c-modal').classList.add('is-active');
-    displayModal.show = !displayModal.show
+   panelDate.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;    
+   displayModal.show = !displayModal.show
   }
   
   onMount(() => {
@@ -70,7 +81,10 @@
   {/each}
 </div>
 
-<Modal modalData={displayModal} />
+<Modal
+  modalData={displayModal}
+  panelInfo={panelDate}
+/>
 
 <style lang="scss">
   .c-calendar {
