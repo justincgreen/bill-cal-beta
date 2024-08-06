@@ -58,9 +58,14 @@
     const calendarDateBlocks = document.querySelectorAll('.c-calendar__date-block');
     calendarDateBlocks.forEach((block) => {
       let blockNumber = block.querySelector('.c-calendar__date-number');
-      let text = blockNumber ? blockNumber.innerHTML : null;
-      let convertedNumber = parseInt(text ?? '');
+      let blockText = blockNumber ? blockNumber.innerHTML : null;
+      let convertedNumber = parseInt(blockText ?? '');
       totalCalendarDays.push(convertedNumber);
+      
+      // Add block class                   
+      if(blockText !== '') {
+        block.classList.add(`c-calendar__block-${convertedNumber}`);
+      }
       
       if(convertedNumber === currentDayOfMonth) {
         block.classList.add('current-day');

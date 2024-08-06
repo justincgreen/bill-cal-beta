@@ -2,8 +2,13 @@
  export let modalData: any; 
  export let panelInfo: any; 
  
+ // Handlers
  const closeModal = () => {
   modalData.show = false;
+ }
+ 
+ const handlePayDay = (e: any) => {
+  alert('Payday');  
  }
 </script>
 
@@ -11,11 +16,11 @@
 <div class="c-modal is-active">
   <div class="c-modal__panel">
     <h2>Modal Panel Header</h2>
-    <button>Mark Pay Day</button>
+    <button on:click={handlePayDay}>Mark Pay Day</button>
     <button>Add Bill</button>
     <button on:click={closeModal}>Close</button>
     
-    <span class="c-modal__panel-date">{ panelInfo?.date }</span>
+    <div class="c-modal__panel-date">Panel Date: { panelInfo?.date }</div>
   </div>
 </div>
 {/if}
@@ -39,6 +44,10 @@
       padding: 20px;
       border-radius: 5px;
       background-color: #fff;
+    }
+    
+    &__panel-date {
+      padding: 20px 20px 20px 0;
     }
   }
 </style>
