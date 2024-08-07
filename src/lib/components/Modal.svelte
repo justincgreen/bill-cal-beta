@@ -1,14 +1,16 @@
 <script lang="ts">
  export let modalData: any; 
- export let panelInfo: any; 
+ export let panelBlockInfo: any; 
  
  // Handlers
  const closeModal = () => {
   modalData.show = false;
  }
  
- const handlePayDay = (e: any) => {
-  alert('Payday');  
+ const handlePayDay = () => {
+  // console.log(typeof panelBlockInfo.blockClass);  
+  let blockElement = document.querySelector(`.${panelBlockInfo.blockClass}`);  
+  blockElement ? blockElement.classList.add('is-payday') : null;
  }
 </script>
 
@@ -20,7 +22,7 @@
     <button>Add Bill</button>
     <button on:click={closeModal}>Close</button>
     
-    <div class="c-modal__panel-date">Panel Date: { panelInfo?.date }</div>
+    <div class="c-modal__panel-date">Panel Date: { panelBlockInfo?.date }</div>
   </div>
 </div>
 {/if}

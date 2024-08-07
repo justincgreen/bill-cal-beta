@@ -40,17 +40,23 @@
   // }
   
   interface panelObject {
-    date?: string;
+    date?: string,
+    blockClass?: string
   }
   
-  let panelDate: panelObject = { date: 'placeholder' };
+  let panelInfo: panelObject = { 
+    date: 'placeholder',
+    blockClass: 'placeholder' 
+  };
   //-----------------------------------------------
   
   // Handlers 
   const handleClick = (e: any) => {
     // alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
     // document.querySelector('.c-modal').classList.add('is-active');
-   panelDate.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;    
+   panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;
+   let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
+   panelInfo.blockClass = panelBlockClassList[1];    
    displayModal.show = !displayModal.show
   }
   
@@ -63,9 +69,9 @@
       totalCalendarDays.push(convertedNumber);
       
       // Add block class                   
-      if(blockText !== '') {
-        block.classList.add(`c-calendar__block-${convertedNumber}`);
-      }
+      // if(blockText !== '') {
+      //   block.classList.add(`c-calendar__block-${convertedNumber}`);
+      // }
       
       if(convertedNumber === currentDayOfMonth) {
         block.classList.add('current-day');
@@ -79,16 +85,16 @@
     <div class="c-calendar__day-title">{day}</div>
   {/each}
   
-  {#each calendarDays as calendarDay}
+  {#each calendarDays as calendarDay, index}
     <div class="c-calendar__date-block" on:click={handleClick} role="button" tabindex="0">
-      <span class="c-calendar__date-number">{calendarDay}</span>
+      <span class={`c-calendar__date-number c-calendar__date-number--${index}`}>{calendarDay}</span>
     </div>
   {/each}
 </div>
 
 <Modal
   modalData={displayModal}
-  panelInfo={panelDate}
+  panelBlockInfo={panelInfo}
 />
 
 <style lang="scss">
@@ -110,18 +116,25 @@
       border: 1px solid #ccc;
       cursor: pointer;
     }
+    
+    &__date-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      padding: 4px;
+      border-radius: 50%;
+    }
   }  
   
-  :global(.current-day > .c-calendar__date-number) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    padding: 2px;
-    background: green;
+  :global(.current-day > .c-calendar__date-number) {       
+    background: green;  
+    color: white;  
+  }  
+  
+  :global(.is-payday) {
+    background: #ffb46d;
     color: white;
-    border-radius: 50%;
   }  
 </style>
