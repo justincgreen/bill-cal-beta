@@ -21,7 +21,7 @@
 </script>
 
 {#if modalData.show}
-<div class="c-modal is-active">
+<div class="c-modal is-active" on:click|self={closeModal}>
   <div class="c-modal__panel">
     <h2>Modal Panel Header</h2>
     <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
