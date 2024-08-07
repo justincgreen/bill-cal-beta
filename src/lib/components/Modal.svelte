@@ -7,10 +7,16 @@
   modalData.show = false;
  }
  
- const handlePayDay = () => {
-  // console.log(typeof panelBlockInfo.blockClass);  
+ const handlePayDay = (e: any) => {
   let blockElement = document.querySelector(`.${panelBlockInfo.blockClass}`);  
-  blockElement ? blockElement.classList.add('is-payday') : null;
+  blockElement ? blockElement.classList.toggle('is-payday') : null;
+  
+  // Control button text from within modal panel  
+  if(panelBlockInfo.buttonText === 'Mark Pay Day') {
+    panelBlockInfo.buttonText = 'Remove Pay Day';
+  }else {
+    panelBlockInfo.buttonText = 'Mark Pay Day';
+  }
  }
 </script>
 
@@ -18,7 +24,7 @@
 <div class="c-modal is-active">
   <div class="c-modal__panel">
     <h2>Modal Panel Header</h2>
-    <button on:click={handlePayDay}>Mark Pay Day</button>
+    <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
     <button>Add Bill</button>
     <button on:click={closeModal}>Close</button>
     

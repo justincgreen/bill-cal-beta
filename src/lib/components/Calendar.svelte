@@ -33,35 +33,39 @@
   // Modal logic
   let displayModal = {
     show: false
-  }; 
-  
-  // let panelDate: { date: string; } = {
-  //   date: 'placeholder'
-  // }
+  };
   
   interface panelObject {
     date?: string,
-    blockClass?: string
+    blockClass?: string,
+    buttonText?: string
   }
   
   let panelInfo: panelObject = { 
     date: 'placeholder',
-    blockClass: 'placeholder' 
+    blockClass: 'placeholder',
+    buttonText: 'Mark Pay Day' 
   };
   //-----------------------------------------------
   
   // Handlers 
-  const handleClick = (e: any) => {
-    // alert(e.currentTarget.querySelector('.c-calendar__date-number').innerHTML);
-    // document.querySelector('.c-modal').classList.add('is-active');
-   panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;
-   let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
-   panelInfo.blockClass = panelBlockClassList[1];    
-   displayModal.show = !displayModal.show
+    const handleClick = (e: any) => {
+      let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
+      panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
+      panelInfo.blockClass = panelBlockClassList[1];    
+      displayModal.show = !displayModal.show;
+      
+      // Control button text from calendar component side based on block .is-payday class
+      if(e.currentTarget.firstElementChild.classList.contains(`is-payday`)) {
+      panelInfo.buttonText = 'Remove Pay Day';
+      }else {
+      panelInfo.buttonText = 'Mark Pay Day';
+      }    
   }
   
   onMount(() => {
     const calendarDateBlocks = document.querySelectorAll('.c-calendar__date-block');
+    
     calendarDateBlocks.forEach((block) => {
       let blockNumber = block.querySelector('.c-calendar__date-number');
       let blockText = blockNumber ? blockNumber.innerHTML : null;
