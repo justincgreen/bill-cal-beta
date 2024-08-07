@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Modal from "$lib/components/Modal.svelte";   
+  import Toast from "$lib/components/Toast.svelte";   
   
   // Build Calendar
   let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -47,6 +48,10 @@
     buttonText: 'Mark Pay Day' 
   };
   //-----------------------------------------------
+  
+  // Toast logic 
+  let toastMessage = 'Testing';
+  //---------------------
   
   // Handlers 
     const handleClick = (e: any) => {
@@ -99,6 +104,9 @@
 <Modal
   modalData={displayModal}
   panelBlockInfo={panelInfo}
+/>
+<Toast
+  toastData={toastMessage}
 />
 
 <style lang="scss">
