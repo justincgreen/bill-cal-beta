@@ -34,8 +34,6 @@
     <button on:click={closeModal}>Close</button>
     
     <div class="c-modal__panel-date">Panel Date: { panelBlockInfo?.date }</div>
-    {$toastValue}
-
   </div>
 </div>
 {/if}
