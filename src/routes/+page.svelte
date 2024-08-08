@@ -55,7 +55,7 @@ const currentMonth = months[currentMonthIndex];
     
     &--red {
       display: inline-flex;
-      background: orangered;
+      background: #ffb46d;
     }
     
     &--green {
