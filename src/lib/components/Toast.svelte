@@ -1,11 +1,14 @@
 <script lang="ts">
   import { getContext } from 'svelte'
   const toastValue = getContext('toastContext');   
+  const toastDisplay = getContext('toastToggle');   
 </script>
 
-<div class="c-toast">
-  { $toastValue }
-</div>
+{#if $toastDisplay}
+  <div class="c-toast">
+    { $toastValue }
+  </div>
+{/if}
 
 <style lang="scss">
   .c-toast {

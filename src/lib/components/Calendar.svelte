@@ -8,6 +8,9 @@
   const toastValue = writable('Testing');
   setContext('toastContext', toastValue);
   
+  const isToastVisible = writable(false);
+  setContext('toastToggle', isToastVisible);
+  
   // Build Calendar
   let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let date = new Date();

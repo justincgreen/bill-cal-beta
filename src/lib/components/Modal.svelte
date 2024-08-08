@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getContext } from 'svelte'
   const toastValue = getContext('toastContext');
+  const toastDisplay = getContext('toastToggle');
   
  export let modalData: any; 
  export let panelBlockInfo: any; 
@@ -17,10 +18,21 @@
   // Control button text from within modal panel  
   if(panelBlockInfo.buttonText === 'Mark Pay Day') {
     panelBlockInfo.buttonText = 'Remove Pay Day';
-    toastValue.set('Payday marked');    
+    toastDisplay.set(true);
+    toastValue.set('Payday marked');
+    
+    setTimeout(() => {
+      toastDisplay.set(false);
+    }, 1000)
   }else {
     panelBlockInfo.buttonText = 'Mark Pay Day';
+    toastDisplay.set(true);    
     toastValue.set('Payday removed'); 
+    
+    setTimeout(() => {
+      toastDisplay.set(false);
+    }, 1000);
+
   }
  }
 </script>
