@@ -1,7 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import Modal from "$lib/components/Modal.svelte";   
   import Toast from "$lib/components/Toast.svelte";   
+  
+  const toastValue = writable('Testing');
+  setContext('toastContext', toastValue);
   
   // Build Calendar
   let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -54,18 +59,18 @@
   //---------------------
   
   // Handlers 
-    const handleClick = (e: any) => {
-      let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
-      panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
-      panelInfo.blockClass = panelBlockClassList[1];    
-      displayModal.show = !displayModal.show;
-      
-      // Control button text from calendar component side based on block .is-payday class
-      if(e.currentTarget.firstElementChild.classList.contains(`is-payday`)) {
-      panelInfo.buttonText = 'Remove Pay Day';
-      }else {
-      panelInfo.buttonText = 'Mark Pay Day';
-      }    
+  const handleClick = (e: any) => {
+    let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
+    panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
+    panelInfo.blockClass = panelBlockClassList[1];    
+    displayModal.show = !displayModal.show;
+    
+    // Control button text from calendar component side based on block .is-payday class
+    if(e.currentTarget.firstElementChild.classList.contains(`is-payday`)) {
+    panelInfo.buttonText = 'Remove Pay Day';
+    }else {
+    panelInfo.buttonText = 'Mark Pay Day';
+    } 
   }
   
   onMount(() => {
@@ -105,9 +110,7 @@
   modalData={displayModal}
   panelBlockInfo={panelInfo}
 />
-<Toast
-  toastData={toastMessage}
-/>
+<Toast />
 
 <style lang="scss">
   .c-calendar {

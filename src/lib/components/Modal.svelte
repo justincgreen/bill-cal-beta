@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { getContext } from 'svelte'
+  const toastValue = getContext('toastContext');
+  
  export let modalData: any; 
  export let panelBlockInfo: any; 
  
@@ -14,8 +17,10 @@
   // Control button text from within modal panel  
   if(panelBlockInfo.buttonText === 'Mark Pay Day') {
     panelBlockInfo.buttonText = 'Remove Pay Day';
+    toastValue.set('Payday marked');    
   }else {
     panelBlockInfo.buttonText = 'Mark Pay Day';
+    toastValue.set('Payday removed'); 
   }
  }
 </script>
@@ -29,6 +34,8 @@
     <button on:click={closeModal}>Close</button>
     
     <div class="c-modal__panel-date">Panel Date: { panelBlockInfo?.date }</div>
+    {$toastValue}
+
   </div>
 </div>
 {/if}

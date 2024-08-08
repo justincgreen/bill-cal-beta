@@ -1,7 +1,8 @@
 <script lang="ts">
-  export let toastData: any;  
+  import { getContext } from 'svelte'
+  const toastValue = getContext('toastContext');   
 </script>
 
 <div class="c-toast">
-  { toastData }
+  { $toastValue }
 </div>
