@@ -36,7 +36,6 @@ const currentMonth = months[currentMonthIndex];
 </div>
 
 <h2>{ currentMonth } { currentYear }</h2>
-<!-- <h2>Current Day: { currentDayOfMonth }</h2> -->
 
 <Calendar />
   

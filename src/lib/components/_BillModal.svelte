@@ -1,6 +1,5 @@
 <script lang="ts">
   export let fromBillParent: any; 
-  // export let billsData : Array<any>; 
   let billName: string = '';
   let billAmount: string = '';
   let billDate: string = '';
