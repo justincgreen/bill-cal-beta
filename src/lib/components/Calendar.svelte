@@ -12,25 +12,44 @@
   setContext('toastToggle', isToastVisible);
   
   // Build Calendar
-  let daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let daysTitle = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let date = new Date();
-  let year = date.getFullYear();
-  let month = date.getMonth();
+  let currentYear = date.getFullYear();
+  let currentMonth = date.getMonth();
 
-  let firstDay = new Date(year, month, 1).getDay();
-  let daysInMonth = new Date(year, month + 1, 0).getDate();
+  // let firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  // let daysInMonth = new Date(currentYear, currentMonth, + 1, 0).getDate();
 
-  let calendarDays: Array<string | number> = [];
-
-  // Fill the blank spaces for days before the first day of the month
-  for (let i = 0; i < firstDay; i++) {
-    calendarDays.push('');
-  }
-
-  // Fill the days of the month
-  for (let i = 1; i <= daysInMonth; i++) {
-    calendarDays.push(i);
-  }
+  let calendarDayNumbers: Array<any> = [];
+  
+  const generateCalendarData = (year: number, month: any) => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const calendarDayNumbers = [];
+    
+    // Get the first day of the month (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const firstDay = new Date(year, month, 1).getDay();
+  
+    // Get the number of days in the month
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    // Fill the blank spaces for days before the first day of the month
+    for (let i = 0; i < firstDay; i++) {
+      calendarDayNumbers.push('');
+    }
+  
+    // Fill the days of the month
+    for (let i = 1; i <= daysInMonth; i++) {
+      // Create a new date object for each day in the month
+      const date = new Date(year, month, i);
+      calendarDayNumbers.push({ date: i, dayName: daysOfWeek[date.getDay()] });
+    }
+  
+    return calendarDayNumbers;
+  };
+  
+  const calendarData = generateCalendarData(currentYear, currentMonth);
+  
+  // console.log(calendarData);
   //----------------------------------------------
   
   // Logic for dynamic .current-day class on calendar
@@ -46,12 +65,16 @@
   
   interface panelObject {
     date?: string,
+    dayName?: string,
+    currentYear: number,
     blockClass?: string,
     buttonText?: string
   }
   
   let panelInfo: panelObject = { 
     date: 'placeholder',
+    dayName: 'placeholder',
+    currentYear: currentYear,
     blockClass: 'placeholder',
     buttonText: 'Mark Pay Day' 
   };
@@ -63,10 +86,11 @@
   
   // Handlers 
   const handleClick = (e: any) => {
-    let panelBlockEmpty = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML === '';
+    let panelBlockEmpty = e.currentTarget.innerHTML.trim() === '';
     
     if(!panelBlockEmpty) {
       let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;    
+      panelInfo.dayName = e.currentTarget.querySelector('.c-calendar__date-day').innerHTML;      
       panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
       panelInfo.blockClass = panelBlockClassList[1];    
       displayModal.show = !displayModal.show;
@@ -104,13 +128,16 @@
 </script>
 
 <div class="c-calendar">
-  {#each daysOfWeek as day}
+  {#each daysTitle as day}
     <div class="c-calendar__day-title">{day}</div>
   {/each}
   
-  {#each calendarDays as calendarDay, index}
+  {#each calendarData as calendarDay, index}
     <div class="c-calendar__date-block" on:click={handleClick} role="button" tabindex="0">
-      <span class={`c-calendar__date-number c-calendar__date-number--${index}`}>{calendarDay}</span>
+      {#if calendarDay.date !== undefined}        
+        <span class={`c-calendar__date-number c-calendar__date-number--${index}`}>{calendarDay.date}</span>
+        <span class="c-calendar__date-day">{calendarDay.dayName}</span>
+      {/if}      
     </div>
   {/each}
 </div>
@@ -139,6 +166,10 @@
       padding: 10px 10px 60px 10px;
       border: 1px solid #ccc;
       cursor: pointer;
+    }
+    
+    &__date-day {
+      display: none;
     }
     
     &__date-number {

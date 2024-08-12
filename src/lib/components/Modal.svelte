@@ -40,12 +40,10 @@
 {#if modalData.show}
 <div class="c-modal is-active" on:click|self={closeModal}>
   <div class="c-modal__panel">
-    <h2>Modal Panel Header</h2>
+    <h2 class="c-modal__panel-date">Current Date: {panelBlockInfo?.dayName} { panelBlockInfo?.date }, { panelBlockInfo?.currentYear }</h2>
     <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
     <button>Add Bill</button>
-    <button on:click={closeModal}>Close</button>
-    
-    <div class="c-modal__panel-date">Panel Date: { panelBlockInfo?.date }</div>
+    <button on:click={closeModal}>Close</button>        
   </div>
 </div>
 {/if}
