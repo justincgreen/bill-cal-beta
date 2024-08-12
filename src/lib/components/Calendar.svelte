@@ -63,17 +63,23 @@
   
   // Handlers 
   const handleClick = (e: any) => {
-    let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;
-    panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
-    panelInfo.blockClass = panelBlockClassList[1];    
-    displayModal.show = !displayModal.show;
+    let panelBlockEmpty = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML === '';
     
-    // Control button text from calendar component side based on block .is-payday class
-    if(e.currentTarget.firstElementChild.classList.contains(`is-payday`)) {
-    panelInfo.buttonText = 'Remove Pay Day';
+    if(!panelBlockEmpty) {
+      let panelBlockClassList = e.currentTarget.querySelector('.c-calendar__date-number').classList;    
+      panelInfo.date = e.currentTarget.querySelector('.c-calendar__date-number').innerHTML;      
+      panelInfo.blockClass = panelBlockClassList[1];    
+      displayModal.show = !displayModal.show;
+      
+      // Control button text from calendar component side based on block .is-payday class
+      if(e.currentTarget.firstElementChild.classList.contains(`is-payday`)) {
+      panelInfo.buttonText = 'Remove Pay Day';
+      }else {
+      panelInfo.buttonText = 'Mark Pay Day';
+      } 
     }else {
-    panelInfo.buttonText = 'Mark Pay Day';
-    } 
+      alert('Please select a day within the current month');
+    }   
   }
   
   onMount(() => {
