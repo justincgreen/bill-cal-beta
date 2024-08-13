@@ -3,8 +3,8 @@
   const toastValue = getContext('toastContext');
   const toastDisplay = getContext('toastToggle');
   
- export let modalData: any; 
- export let panelBlockInfo: any; 
+  export let modalData: any; 
+  export let panelBlockInfo: any; 
  
  // Handlers
  const closeModal = () => {
@@ -38,7 +38,8 @@
  
  // Format the date based on this expression -> panelBlockInfo?.date
  const handleFormatDate = (blockDate: string) => {
-   const stringToNumber = parseInt(blockDate, 10);
+  const stringToNumber = parseInt(blockDate, 10);
+  
   if(stringToNumber  === 1 || stringToNumber  === 21 || stringToNumber  == 31) {
     return stringToNumber + 'st'
   }else if(stringToNumber === 2 || stringToNumber === 22) {
