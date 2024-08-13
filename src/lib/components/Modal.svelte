@@ -35,12 +35,28 @@
 
   }
  }
+ 
+ // Format the date based on this expression -> panelBlockInfo?.date
+ const handleFormatDate = (blockDate: string) => {
+   const stringToNumber = parseInt(blockDate, 10);
+  if(stringToNumber  === 1 || stringToNumber  === 21 || stringToNumber  == 31) {
+    return stringToNumber + 'st'
+  }else if(stringToNumber === 2 || stringToNumber === 22) {
+    return stringToNumber + 'nd'
+  }else if(stringToNumber === 3 || stringToNumber === 23) {
+    return stringToNumber + 'rd'
+  }else {
+    return stringToNumber + 'th'
+  }
+ }
+ 
+ // handleFormatDate(20);
 </script>
 
 {#if modalData.show}
 <div class="c-modal is-active" on:click|self={closeModal}>
   <div class="c-modal__panel">
-    <h2 class="c-modal__panel-date">Current Date: {panelBlockInfo?.dayName} { panelBlockInfo?.date }, { panelBlockInfo?.currentYear }</h2>
+    <h2 class="c-modal__panel-date">{panelBlockInfo?.dayName} {panelBlockInfo?.currentMonth} { handleFormatDate(panelBlockInfo?.date) }, { panelBlockInfo?.currentYear }</h2>
     <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
     <button>Add Bill</button>
     <button on:click={closeModal}>Close</button>        

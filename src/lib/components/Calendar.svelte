@@ -12,14 +12,15 @@
   setContext('toastToggle', isToastVisible);
   
   // Build Calendar
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  
   let daysTitle = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let date = new Date();
   let currentYear = date.getFullYear();
   let currentMonth = date.getMonth();
-
-  // let firstDay = new Date(currentYear, currentMonth, 1).getDay();
-  // let daysInMonth = new Date(currentYear, currentMonth, + 1, 0).getDate();
-
   let calendarDayNumbers: Array<any> = [];
   
   const generateCalendarData = (year: number, month: any) => {
@@ -48,8 +49,6 @@
   };
   
   const calendarData = generateCalendarData(currentYear, currentMonth);
-  
-  // console.log(calendarData);
   //----------------------------------------------
   
   // Logic for dynamic .current-day class on calendar
@@ -74,6 +73,7 @@
   let panelInfo: panelObject = { 
     date: 'placeholder',
     dayName: 'placeholder',
+    currentMonth: months[currentMonth],
     currentYear: currentYear,
     blockClass: 'placeholder',
     buttonText: 'Mark Pay Day' 
@@ -114,11 +114,6 @@
       let blockText = blockNumber ? blockNumber.innerHTML : null;
       let convertedNumber = parseInt(blockText ?? '');
       totalCalendarDays.push(convertedNumber);
-      
-      // Add block class                   
-      // if(blockText !== '') {
-      //   block.classList.add(`c-calendar__block-${convertedNumber}`);
-      // }
       
       if(convertedNumber === currentDayOfMonth) {
         block.classList.add('current-day');
