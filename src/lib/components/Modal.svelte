@@ -36,6 +36,10 @@
   }
  }
  
+ const handleAddBill = () => {
+   alert('clicked');  
+ }
+ 
  // Format the date based on this expression -> panelBlockInfo?.date
  const handleFormatDate = (blockDate: string) => {
   const stringToNumber = parseInt(blockDate, 10);
@@ -59,7 +63,7 @@
   <div class="c-modal__panel">
     <h2 class="c-modal__panel-date">{panelBlockInfo?.dayName} {panelBlockInfo?.currentMonth} { handleFormatDate(panelBlockInfo?.date) }, { panelBlockInfo?.currentYear }</h2>
     <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
-    <button>Add Bill</button>
+    <button on:click={handleAddBill}>Add Bill</button>
     <button on:click={closeModal}>Close</button>        
   </div>
 </div>

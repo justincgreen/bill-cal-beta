@@ -104,7 +104,7 @@
     }else {
       alert('Please select a day within the current month');
     }   
-  }
+  }    
   
   onMount(() => {
     const calendarDateBlocks = document.querySelectorAll('.c-calendar__date-block');
