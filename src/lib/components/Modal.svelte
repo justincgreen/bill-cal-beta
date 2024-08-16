@@ -1,7 +1,9 @@
 <script lang="ts">
   import { getContext } from 'svelte'
+  import BillForm from '$lib/components/BillForm.svelte'
   const toastValue = getContext('toastContext');
   const toastDisplay = getContext('toastToggle');
+  let billFormDisplay: boolean = false;
   
   export let modalData: any; 
   export let panelBlockInfo: any; 
@@ -9,6 +11,7 @@
  // Handlers
  const closeModal = () => {
   modalData.show = false;
+  billFormDisplay = false;
  }
  
  const handlePayDay = (e: any) => {
@@ -37,8 +40,12 @@
  }
  
  const handleAddBill = () => {
-   alert('clicked');  
+    billFormDisplay = true;
  }
+ 
+ const handleRemoveBillForm = () => {
+     billFormDisplay = false;
+  }
  
  // Format the date based on this expression -> panelBlockInfo?.date
  const handleFormatDate = (blockDate: string) => {
@@ -62,9 +69,17 @@
 <div class="c-modal is-active" on:click|self={closeModal}>
   <div class="c-modal__panel">
     <h2 class="c-modal__panel-date">{panelBlockInfo?.dayName} {panelBlockInfo?.currentMonth} { handleFormatDate(panelBlockInfo?.date) }, { panelBlockInfo?.currentYear }</h2>
-    <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>
-    <button on:click={handleAddBill}>Add Bill</button>
-    <button on:click={closeModal}>Close</button>        
+    <button on:click={handlePayDay}>{ panelBlockInfo?.buttonText }</button>    
+    {#if billFormDisplay}
+      <button on:click={handleRemoveBillForm}>Remove Bill</button>
+      {:else}
+      <button on:click={handleAddBill}>Add Bill</button>
+    {/if}
+    <button on:click={closeModal}>Close</button>      
+    
+    {#if billFormDisplay}
+      <BillForm />  
+    {/if}
   </div>
 </div>
 {/if}
